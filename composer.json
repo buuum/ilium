@@ -1,0 +1,14 @@
+{
+  "name": "buuum/ilium",
+  "type": "skeleton",
+  "description": "Skeleton App",
+  "homepage": "https://github.com/buuum/ilium",
+  "keywords": [
+    "skeleton",
+    "app"
+  ],
+  "license": "MIT",
+  "require": {
+    "buuum/iliumcore": "^1.0"
+  }
+}

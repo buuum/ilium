@@ -1,0 +1,22 @@
+default_host: default.test
+timezone: Europe/Madrid
+development: true
+
+db:
+  host: localhost
+  user: root
+  pass:
+  name: dbname
+
+scopes:
+  admin:
+    regex: '@^/(admin)/*@'
+    config:
+      session_name: admin
+  web:
+    regex: '@(.*)@'
+    config:
+      session_name: web
+
+bootstraps:
+  - app/bootstrap.php

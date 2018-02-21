@@ -1,0 +1,31 @@
+<IfModule mod_headers.c>
+<FilesMatch "\.(ico|gif|jpg|jpeg|png|flv|pdf|woff|eot|svg|ttf|swf|css|js)$">
+  Header set Cache-Control "public, max-age=29030400"
+</FilesMatch>
+</IfModule>
+
+RewriteEngine On
+#php_value serialize_precision -1
+#Options +FollowSymLinks
+
+# Redirect Trailing Slashes If Not A Folder...
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+#RewriteCond %{REQUEST_URI}  !\.(.{2,5})(\?.*){0,1}$
+#RewriteRule ^(.*)([^/])$ https://%{HTTP_HOST}/$1$2/ [L,R=301]
+
+# Handle Front Controller...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+# Handle Authorization Header
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
