@@ -3,20 +3,42 @@ timezone: Europe/Madrid
 development: true
 
 db:
-  host: localhost
+  host: 127.0.0.1
   user: root
   pass:
   name: dbname
 
+#configs:
+#  es:
+#    regex: '@^/es(/.*|/{0,1})$@'
+#    config_file: kuvut.com_es
+#  fr:
+#    regex: '@^/fr(/.*|/{0,1})$@'
+#    config_file: kuvut.com_es
+#  it:
+#    regex: '@^/it(/.*|/{0,1})$@'
+#    config_file: kuvut.com_es
+#  de:
+#    regex: '@^/de(/.*|/{0,1})$@'
+#    config_file: kuvut.com_es
+
 scopes:
   admin:
-    regex: '@^/(admin)/*@'
+    regex: '@^/(admin)(/.*|/{0,1})$@'
     config:
-      session_name: admin
+      session:
+        name: com-s-id-admin
+        options:
+          cookie_lifetime: 31536000
+          gc_maxlifetime: 31536000
   web:
     regex: '@(.*)@'
     config:
-      session_name: web
+      session:
+        name: com-s-id-web
+        options:
+          cookie_lifetime: 31536000
+          gc_maxlifetime: 31536000
 
 bootstraps:
   - app/bootstrap.php
